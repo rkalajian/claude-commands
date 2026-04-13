@@ -9,6 +9,7 @@ This folder contains concise Git and npm workflow guidance for the repository.
 - `pr.md` — pull request workflow and checklist
 - `push.md` — push/deploy verification steps
 - `npm.md` — safe npm package install/update/remove workflow
+- `composer.md` — safe Composer package install/update/remove workflow
 
 ## Usage
 
@@ -19,6 +20,7 @@ Refer to these files any time you:
 - open a pull request
 - push code to the remote
 - install or update npm packages
+- install or update Composer packages
 
 ## Notes
 
