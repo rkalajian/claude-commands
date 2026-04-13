@@ -6,7 +6,8 @@
       "Bash(git branch:*)",
       "Bash(git commit:*)",
       "Bash(git -C /home/rkalajian/.claude/commands status)",
-      "Bash(git -C /home/rkalajian/.claude/commands log --oneline -5)"
+      "Bash(git -C /home/rkalajian/.claude/commands log --oneline -5)",
+      "Bash(git push:*)"
     ]
   }
 }

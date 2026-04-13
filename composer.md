@@ -63,6 +63,54 @@ composer install --dry-run    # Confirm lock file is consistent
 
 ---
 
+## Pinning Wildcard Constraints
+
+If `composer.json` contains `*` or unversioned constraints, resolve them to exact versions before or during an update.
+
+### 1. Find wildcards
+
+```bash
+grep -E '"\*"' composer.json
+```
+
+### 2. Resolve installed versions from lock file
+
+```bash
+composer show --format=json | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+for p in data.get('installed', []):
+    print(p['name'], p['version'])
+" | sort
+```
+
+Or for a specific package:
+
+```bash
+composer show vendor/package | grep '^versions'
+```
+
+### 3. Replace wildcards in composer.json
+
+For each `*` constraint, update to the resolved version:
+
+```bash
+# Example: replace * with exact installed version
+sed -i 's/"vendor\/package": "\*"/"vendor\/package": "1.2.3"/' composer.json
+```
+
+Prefer editing `composer.json` directly. Use exact versions (no `^` or `~`).
+
+### 4. Verify resolution still holds
+
+```bash
+composer install --dry-run
+```
+
+Confirm no conflicts before committing.
+
+---
+
 ## Updating Packages
 
 ### 1. Check what's outdated
