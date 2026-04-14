@@ -1,0 +1,58 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_buddy__*"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\": \"Caveman mode active — level: full. Be terse, drop articles/filler/pleasantries. Fragments OK. Technical terms exact. Off only: stop caveman / normal mode.\"}'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/rebel/Code/claude-buddy/hooks/react.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/rebel/Code/claude-buddy/hooks/buddy-comment.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/rebel/Code/claude-buddy/statusline/buddy-status.sh",
+    "padding": 1,
+    "refreshInterval": 5
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": false,
+  "enabledPlugins": {
+    "caveman@caveman": true
+  }
+}
