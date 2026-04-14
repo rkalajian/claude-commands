@@ -1,8 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "mcp__claude_buddy__*"
-    ]
+    "allow": []
   },
   "hooks": {
     "SessionStart": [
@@ -14,34 +12,7 @@
           }
         ]
       }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/rebel/Code/claude-buddy/hooks/react.sh"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/rebel/Code/claude-buddy/hooks/buddy-comment.sh"
-          }
-        ]
-      }
     ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "/Users/rebel/Code/claude-buddy/statusline/buddy-status.sh",
-    "padding": 1,
-    "refreshInterval": 5
   },
   "extraKnownMarketplaces": {
     "caveman": {
