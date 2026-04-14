@@ -8,7 +8,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '{\"systemMessage\": \"Caveman mode active — level: full. Be terse, drop articles/filler/pleasantries. Fragments OK. Technical terms exact. Off only: stop caveman / normal mode.\"}'"
+            "command": "echo '{\"systemMessage\": \"Caveman mode active — level: ultra. Maximum compression. Drop all articles/filler/pleasantries/hedging. Single-word answers when possible. No fragments — just nouns and verbs. Off only: stop caveman / normal mode.\"}'"
           }
         ]
       }
@@ -25,5 +25,9 @@
   "alwaysThinkingEnabled": false,
   "enabledPlugins": {
     "caveman@caveman": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"/Users/rebel/.claude/statusline-command.sh\""
   }
 }
