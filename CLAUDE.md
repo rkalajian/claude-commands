@@ -6,7 +6,7 @@ Be terse. Use the minimum tokens necessary to complete the task. No preamble, no
 
 ## Caveman Mode
 
-When caveman mode is active (injected via SessionStart hook), apply caveman compression to ALL output — final responses, reasoning steps, thinking, intermediate analysis, everything. No exceptions unless user says "stop caveman" or "normal mode".
+When caveman mode is active (injected via SessionStart hook), apply caveman compression at **ultra** level to ALL output — final responses, reasoning steps, thinking, intermediate analysis, everything. No exceptions unless user says "stop caveman" or "normal mode". Use `/caveman lite|full|ultra` to change level.
 
 ## Model Routing
 

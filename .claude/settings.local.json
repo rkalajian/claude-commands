@@ -4,7 +4,9 @@
       "Bash(bash /Users/rebel/.claude/plugins/cache/caveman/caveman/600e8efcd6ac/hooks/caveman-statusline.sh)",
       "Bash(echo \"exit: $?\")",
       "Bash(git add:*)",
-      "Bash(git commit -m ':*)"
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(gh pr:*)"
     ]
   }
 }
