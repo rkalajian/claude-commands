@@ -1,13 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git init:*)",
+      "Bash(bash /Users/rebel/.claude/plugins/cache/caveman/caveman/600e8efcd6ac/hooks/caveman-statusline.sh)",
+      "Bash(echo \"exit: $?\")",
       "Bash(git add:*)",
-      "Bash(git branch:*)",
-      "Bash(git commit:*)",
-      "Bash(git -C /home/rkalajian/.claude/commands status)",
-      "Bash(git -C /home/rkalajian/.claude/commands log --oneline -5)",
-      "Bash(git push:*)"
+      "Bash(git commit -m ':*)"
     ]
   }
 }

@@ -25,5 +25,9 @@
   "alwaysThinkingEnabled": false,
   "enabledPlugins": {
     "caveman@caveman": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"/Users/rebel/.claude/statusline-command.sh\""
   }
 }
