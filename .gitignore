@@ -1,0 +1,16 @@
+# Ignore everything
+*
+
+# Keep commands
+!commands/
+!commands/**
+
+# Keep skills
+!skills/
+!skills/**
+
+# Keep top-level config files
+!README.md
+!CLAUDE.md
+!settings.json
+!.gitignore

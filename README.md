@@ -1,39 +1,59 @@
-# Workflow Reference
+# ~/.claude
 
-This folder contains concise Git and npm workflow guidance for the repository.
+Personal Claude Code configuration — hooks, skills, commands, and global rules.
 
-## Contents
+## Structure
 
-- `commit.md` — commit workflow and formatting rules
-- `ghbranch.md` — branch creation and naming conventions
-- `pr.md` — pull request workflow and checklist
-- `push.md` — push/deploy verification steps
-- `npm.md` — safe npm package install/update/remove workflow
-- `composer.md` — safe Composer package install/update/remove workflow
+```
+.claude/
+├── CLAUDE.md              # Global rules: response style, model routing
+├── settings.json          # Permissions, hooks, status line, plugins
+├── commands/              # Slash command docs (git, npm, composer workflows)
+├── skills/                # Custom skills loaded by Claude Code
+│   ├── github/            # GitHub PR/issue/CI workflow
+│   └── tailwind-optimize/ # Convert CSS to Tailwind utility classes
+└── .gitignore             # Tracks commands/, skills/, CLAUDE.md, settings.json
+```
 
-## Usage
+## Global Rules (CLAUDE.md)
 
-Refer to these files any time you:
+- Terse responses, no filler or pleasantries
+- Three-tier model routing: Haiku → Sonnet → Opus by task complexity
+- Caveman mode injected via SessionStart hook
 
-- create a new branch
-- stage and commit changes
-- open a pull request
-- push code to the remote
-- install or update npm packages
-- install or update Composer packages
+## Settings
 
-## Notes
+Key config in `settings.json`:
 
-- `staging` is the default PR target for features and fixes
-- `main` is reserved for hotfix or production-ready merges
-- Always pin npm installs with `--save-exact`
-- Do not commit sensitive or generated files like `wp-config.php`, `node_modules/`, or `vendor/`
+| Setting | Value | Purpose |
+|---|---|---|
+| `alwaysThinkingEnabled` | false | No extended thinking by default |
+| `enabledPlugins` | `caveman@caveman` | Caveman compression mode |
 
-## Recommended workflow
+## Hooks
 
-1. Start from `staging`
-2. Create a branch with a clear prefix (`feat/`, `fix/`, `chore/`, `hotfix/`)
-3. Make changes and stage intentionally
-4. Commit with a structured message
-5. Push, open a PR, and assign a reviewer
-6. Confirm CI/build success after merge
+| Event | Hook | Purpose |
+|---|---|---|
+| `SessionStart` | inline echo | Inject caveman mode system message |
+
+## Skills
+
+| Skill | Trigger | Does |
+|---|---|---|
+| `github` | `/github`, `/pr`, `/issue` | PR create/review, issue management, CI status |
+| `tailwind-optimize` | `/tailwind-optimize` | Convert CSS → Tailwind utility classes |
+
+## Commands
+
+Workflow reference docs in `commands/` — used by Claude as slash commands:
+
+- `commit.md` — commit formatting and staging rules
+- `ghbranch.md` — branch naming and creation
+- `pr.md` — PR workflow and checklist
+- `push.md` — push/deploy verification
+- `npm.md` — safe npm install/update/remove
+- `composer.md` — safe Composer install/update/remove
+
+## Plugins
+
+- **caveman** — `JuliusBrussee/caveman` via GitHub marketplace. Ultra-compressed communication mode. `/caveman lite|full|ultra` to switch levels.

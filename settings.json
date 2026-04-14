@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": []
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\": \"Caveman mode active — level: full. Be terse, drop articles/filler/pleasantries. Fragments OK. Technical terms exact. Off only: stop caveman / normal mode.\"}'"
+          }
+        ]
+      }
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": false,
+  "enabledPlugins": {
+    "caveman@caveman": true
+  }
+}
