@@ -105,6 +105,50 @@ Confirm build passes before committing the package.json / package-lock.json chan
 
 ---
 
+## Resolving Wildcard (`*`) Versions in package.json
+
+When `package.json` contains `*` for a dependency version, replace it with a pinned version before any install or commit.
+
+### 1. Find all wildcards
+
+```bash
+grep -E '"[^"]+": "\*"' package.json
+```
+
+### 2. Resolve each wildcard to a pinned version
+
+For each package with `*`:
+
+```bash
+npm view <package> dist-tags         # See latest tag
+npm view <package> time --json       # Check publish date of latest
+```
+
+Apply same rules as installing: pick `latest` if ≥7 days old, else pick most recent version ≥7 days old.
+
+### 3. Replace in package.json
+
+Replace `"*"` with exact version string (no `^` or `~`):
+
+```json
+"<package>": "X.Y.Z"
+```
+
+### 4. Install and audit
+
+```bash
+npm install
+npm audit
+```
+
+Confirm no wildcards remain:
+
+```bash
+grep '"*"' package.json   # Should return nothing
+```
+
+---
+
 ## Removing a Package
 
 ```bash
