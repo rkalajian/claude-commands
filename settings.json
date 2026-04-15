@@ -11,8 +11,145 @@
             "command": "echo '{\"systemMessage\": \"Caveman mode active — level: ultra. Maximum compression. Drop all articles/filler/pleasantries/hedging. Single-word answers when possible. No fragments — just nouns and verbs. Off only: stop caveman / normal mode.\"}'"
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\"",
+            "timeout": 5
+          }
+        ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"/Users/rebel/.claude/statusline-command.sh\""
+  },
+  "enabledPlugins": {
+    "caveman@caveman": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -22,12 +159,5 @@
       }
     }
   },
-  "alwaysThinkingEnabled": false,
-  "enabledPlugins": {
-    "caveman@caveman": true
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash \"/Users/rebel/.claude/statusline-command.sh\""
-  }
+  "alwaysThinkingEnabled": false
 }
