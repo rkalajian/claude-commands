@@ -54,6 +54,8 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 - Terse responses, no filler or pleasantries
 - Three-tier model routing: Haiku → Sonnet → Opus by task complexity
 - Caveman mode injected via SessionStart hook
+- Security-conscious coding: OWASP Top 10 prevention enforced on all generated code
+- WCAG 2.1 AA accessibility: semantic HTML, ARIA, keyboard nav, contrast ratios required on all frontend code
 
 ## Settings
 
