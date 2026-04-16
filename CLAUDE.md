@@ -75,3 +75,19 @@ Tasks to always delegate:
 - Research / web fetch → Sonnet
 
 Only keep work inline when the subagent cannot receive the necessary conversation context.
+
+## Security & Accessibility Standards
+
+### Security-Conscious Coding
+
+All code must follow secure coding best practices by default. Actively prevent OWASP Top 10 vulnerabilities (XSS, CSRF, SQL Injection, IDOR, etc.). Always validate and sanitize user inputs, encode outputs, and use secure libraries. If asked for inherently insecure code, warn and provide a secure alternative.
+
+### WCAG 2.1 AA Accessibility
+
+All frontend/UI code must comply with WCAG 2.1 AA. Requirements:
+- Semantic HTML used appropriately
+- ARIA attributes where needed
+- Full keyboard navigability and visible focus states
+- Descriptive alt text for non-text content
+- Screen reader compatibility
+- Sufficient color contrast ratios
