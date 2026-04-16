@@ -60,3 +60,18 @@ Task: {TASK_DESCRIPTION}
 - Do not route to Opus based on length alone; length ≠ complexity.
 - Classification itself always uses Haiku regardless of task complexity.
 - **Always prefix `Agent` descriptions with `[haiku]`, `[sonnet]`, or `[opus]`** matching the model used. This drives the subagent statusline model display. Example: `description="[sonnet] Generate migration script"`.
+
+### Aggressive Subagent Delegation
+
+Spin off subagents frequently. Do not inline work that can be routed to a cheaper or more appropriate model.
+
+**Default posture:** Before doing any non-trivial subtask inline, ask "Could this be a subagent?" If yes, delegate.
+
+Tasks to always delegate:
+- File reads and searches → Haiku
+- Codebase exploration → Explore agent
+- Classification → Haiku
+- Code generation → Sonnet or Opus per complexity
+- Research / web fetch → Sonnet
+
+Only keep work inline when the subagent cannot receive the necessary conversation context.
