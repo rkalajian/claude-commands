@@ -6,7 +6,18 @@
       "Bash(git add:*)",
       "Bash(git commit -m ':*)",
       "Bash(git push:*)",
-      "Bash(gh pr:*)"
+      "Bash(gh pr:*)",
+      "Bash(git stash *)",
+      "Skill(statusline)",
+      "Bash(git commit *)",
+      "Bash(git -C /Users/rebel/.claude ls-files statusline-command.sh)",
+      "Bash(git -C /Users/rebel/.claude add statusline-command.sh)",
+      "Bash(git -C /Users/rebel/.claude status)",
+      "Bash(git -C /Users/rebel/.claude add .gitignore)",
+      "Bash(git -C /Users/rebel/.claude restore --staged .claude/settings.local.json)",
+      "Bash(git *)",
+      "Bash(bash /Users/rebel/.claude/statusline-command.sh)",
+      "Bash(chmod +x *)"
     ]
   }
 }
