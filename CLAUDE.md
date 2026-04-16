@@ -18,17 +18,18 @@ Use a three-tier model strategy for all tasks. Before executing any non-trivial 
 
 | Model | Use for |
 |---|---|
-| `claude-haiku-4-5-20251001` | Classification, simple lookups, formatting, file reads, trivial edits |
-| `claude-sonnet-4-6` | Most tasks — code generation, copywriting, research, multi-step reasoning |
-| `claude-opus-4-6` | Complex architecture decisions, nuanced long-form writing, ambiguous or high-stakes tasks |
+| `haiku` (`claude-haiku-4-5-20251001`) | Classification, simple lookups, formatting, file reads, trivial edits |
+| `sonnet` (`claude-sonnet-4-6`) | Most tasks — code generation, copywriting, research, multi-step reasoning |
+| `opus` (`claude-opus-4-6`) | Complex architecture decisions, nuanced long-form writing, ambiguous or high-stakes tasks |
 
 ### Classification Step
 
-When a new task arrives, use the `Task` tool with Haiku to classify before proceeding:
+When a new task arrives, use the `Agent` tool with Haiku to classify before proceeding:
 
 ```
-Task(
-  model="claude-haiku-4-5-20251001",
+Agent(
+  model="haiku",
+  description="[haiku] Classify task complexity",
   prompt="""
 Classify the complexity of this task. Respond with ONLY one word: simple, medium, or complex.
 
@@ -58,3 +59,4 @@ Task: {TASK_DESCRIPTION}
 - When in doubt, route to Sonnet — it handles the vast majority of tasks well.
 - Do not route to Opus based on length alone; length ≠ complexity.
 - Classification itself always uses Haiku regardless of task complexity.
+- **Always prefix `Agent` descriptions with `[haiku]`, `[sonnet]`, or `[opus]`** matching the model used. This drives the subagent statusline model display. Example: `description="[sonnet] Generate migration script"`.

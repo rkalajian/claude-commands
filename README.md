@@ -32,7 +32,7 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 
 **Caveman mode** activates automatically on session start via the `SessionStart` hook. Change intensity with `/caveman lite|full|ultra`, or disable with `stop caveman`.
 
-**Model routing** is automatic — Haiku classifies task complexity, then routes to Haiku / Sonnet / Opus accordingly. Override by naming a model explicitly.
+**Model routing** is automatic — Haiku classifies task complexity, then routes to Haiku / Sonnet / Opus accordingly. Override by naming a model explicitly. All `Agent` calls use `[model]`-prefixed descriptions (e.g. `[haiku] Classify task`) so the subagent statusline can display the model.
 
 ## Structure
 
@@ -40,12 +40,13 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 .claude/
 ├── CLAUDE.md                  # Global rules: response style, model routing
 ├── settings.json              # Permissions, hooks, status line, plugins
-├── statusline-command.sh      # Custom status line script
+├── statusline-command.sh      # Main status line script
+├── subagent-statusline.sh     # Subagent status line (model badge + tokens)
 ├── commands/                  # Slash command docs (git, npm, composer workflows)
 ├── skills/                    # Custom skills loaded by Claude Code
 │   ├── github/                # GitHub PR/issue/CI workflow
 │   └── tailwind-optimize/     # Convert CSS to Tailwind utility classes
-└── .gitignore                 # Tracks commands/, skills/, CLAUDE.md, settings.json, statusline-command.sh
+└── .gitignore                 # Tracks commands/, skills/, CLAUDE.md, settings.json, statusline scripts
 ```
 
 ## Global Rules (CLAUDE.md)
@@ -62,6 +63,7 @@ Key config in `settings.json`:
 |---|---|---|
 | `alwaysThinkingEnabled` | false | No extended thinking by default |
 | `enabledPlugins` | `caveman@caveman` | Caveman compression mode |
+| `subagentStatusLine` | `subagent-statusline.sh` | Per-subagent model badge + token count |
 
 ## Hooks
 
@@ -89,7 +91,9 @@ Workflow reference docs in `commands/` — used by Claude as slash commands:
 
 ## Status Line
 
-Custom status line via `statusline-command.sh`. Order left→right:
+### Main (`statusline-command.sh`)
+
+Order left→right:
 
 | Segment | Content |
 |---|---|
@@ -98,6 +102,19 @@ Custom status line via `statusline-command.sh`. Order left→right:
 | Dir | Basename of current working directory |
 | Git | Branch name + dirty marker (robbyrussell style) |
 | Node/npm | `vX.Y.Z/npm@X.Y.Z` |
+
+### Subagent (`subagent-statusline.sh`)
+
+Shown per running subagent. Reads `[model]` prefix from the Agent description field:
+
+| Segment | Content |
+|---|---|
+| Status icon | `⟳` running / `·` idle |
+| Model badge | `[haiku]` (yellow) / `[sonnet]` (blue) / `[opus]` (purple) |
+| Description | Agent description with model prefix stripped |
+| Tokens | Compact token count (e.g. `1.4kt`) |
+
+Requires Agent calls to follow the `[model] Description` naming convention (enforced in `CLAUDE.md`).
 
 ## Plugins
 
