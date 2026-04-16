@@ -15,3 +15,4 @@
 !settings.json
 !.gitignore
 !statusline-command.sh
+!subagent-statusline.sh
