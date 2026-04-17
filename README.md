@@ -42,6 +42,7 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 ├── settings.json              # Permissions, hooks, status line, plugins
 ├── statusline-command.sh      # Main status line script
 ├── subagent-statusline.sh     # Subagent status line (model badge + tokens)
+├── ensure-plugins.sh          # Auto-installs missing plugins on SessionStart
 ├── commands/                  # Slash command docs (git, npm, composer workflows)
 ├── skills/                    # Custom skills loaded by Claude Code
 │   ├── github/                # GitHub PR/issue/CI workflow
@@ -72,6 +73,7 @@ Key config in `settings.json`:
 | Event | Hook | Purpose |
 |---|---|---|
 | `SessionStart` | inline echo | Inject caveman mode system message |
+| `SessionStart` | `ensure-plugins.sh` | Install missing plugins |
 | `SessionStart` | pixel-agents | Session lifecycle event |
 | `SessionEnd` | pixel-agents | Session lifecycle event |
 | `Stop` | pixel-agents | Turn stop event |
@@ -132,3 +134,5 @@ Requires Agent calls to follow the `[model] Description` naming convention (enfo
 ## Plugins
 
 - **caveman** — `JuliusBrussee/caveman` via GitHub marketplace. Ultra-compressed communication mode. `/caveman lite|full|ultra` to switch levels.
+
+To add a required plugin, append its `name@marketplace` identifier to `REQUIRED_PLUGINS` in `ensure-plugins.sh`. It will be installed automatically on next session start.
