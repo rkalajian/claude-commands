@@ -16,3 +16,4 @@
 !.gitignore
 !statusline-command.sh
 !subagent-statusline.sh
+!ensure-plugins.sh
