@@ -8,7 +8,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '{\"systemMessage\": \"Caveman mode active — level: ultra. Maximum compression. Drop all articles/filler/pleasantries/hedging. Single-word answers when possible. No fragments — just nouns and verbs. Off only: stop caveman / normal mode.\"}'"
+            "command": "echo '{\"systemMessage\": \"Caveman mode active — level: ultra. Maximum compression. Drop all articles/filler/pleasantries/hedging. Single-word answers when possible. No fragments — just nouns and verbs. Off only: stop caveman / normal mode.\\n\\nSUBAGENT RULES (enforce every turn): 1) Classify ALL non-trivial tasks with Haiku before proceeding. 2) File reads/searches → Haiku subagent. 3) Codebase exploration → Explore agent. 4) Code gen → Sonnet/Opus per complexity. 5) Research/web → Sonnet. Never inline work a subagent can do.\"}'"
           }
         ]
       },
