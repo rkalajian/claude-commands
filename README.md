@@ -63,7 +63,7 @@ Key config in `settings.json`:
 
 | Setting | Value | Purpose |
 |---|---|---|
-| `alwaysThinkingEnabled` | false | No extended thinking by default |
+| `alwaysThinkingEnabled` | true | Extended thinking always on |
 | `enabledPlugins` | `caveman@caveman` | Caveman compression mode |
 | `subagentStatusLine` | `subagent-statusline.sh` | Per-subagent model badge + token count |
 
@@ -72,6 +72,17 @@ Key config in `settings.json`:
 | Event | Hook | Purpose |
 |---|---|---|
 | `SessionStart` | inline echo | Inject caveman mode system message |
+| `SessionStart` | pixel-agents | Session lifecycle event |
+| `SessionEnd` | pixel-agents | Session lifecycle event |
+| `Stop` | pixel-agents | Turn stop event |
+| `PermissionRequest` | pixel-agents | Permission gate event |
+| `Notification` | pixel-agents | Notification event |
+| `UserPromptSubmit` | pixel-agents | Pre-prompt event |
+| `PreToolUse` | pixel-agents | Before tool execution |
+| `PostToolUse` | pixel-agents | After tool success |
+| `PostToolUseFailure` | pixel-agents | After tool failure |
+| `SubagentStart` | pixel-agents | Subagent lifecycle event |
+| `SubagentStop` | pixel-agents | Subagent lifecycle event |
 
 ## Skills
 

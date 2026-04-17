@@ -17,7 +17,10 @@
       "Bash(git -C /Users/rebel/.claude restore --staged .claude/settings.local.json)",
       "Bash(git *)",
       "Bash(bash /Users/rebel/.claude/statusline-command.sh)",
-      "Bash(chmod +x *)"
+      "Bash(chmod +x *)",
+      "Bash(mkdir -p ~/.config/caveman)",
+      "Read(~/.config/caveman/**)",
+      "Bash(node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\")"
     ]
   }
 }
