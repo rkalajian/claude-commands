@@ -4,23 +4,29 @@ This folder contains concise Git and npm workflow guidance for the repository.
 
 ## Contents
 
+### Atomic
 - `commit.md` — commit workflow and formatting rules
 - `ghbranch.md` — branch creation and naming conventions
+- `checkout.md` — checkout branch and pull latest
+- `push.md` — push branch; post-merge deploy verification
 - `pr.md` — pull request workflow and checklist
-- `push.md` — push/deploy verification steps
 - `npm.md` — safe npm package install/update/remove workflow
 - `composer.md` — safe Composer package install/update/remove workflow
+
+### Combo
+- `deliver.md` — commit → push
+- `ship.md` — commit → push → PR
 
 ## Usage
 
 Refer to these files any time you:
 
-- create a new branch
+- create or switch branches
 - stage and commit changes
 - open a pull request
 - push code to the remote
-- install or update npm packages
-- install or update Composer packages
+- verify a deploy after merge
+- install or update npm or Composer packages
 
 ## Notes
 
