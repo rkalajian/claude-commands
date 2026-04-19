@@ -24,8 +24,11 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 |---|---|
 | `/commit` | Caveman-compressed conventional commit |
 | `/ghbranch` | Create and push a branch |
+| `/checkout` | Checkout branch and pull latest |
 | `/pr` | Open a pull request |
 | `/push` | Push and deploy verification |
+| `/deliver` | Commit → push (combo) |
+| `/ship` | Commit → push → PR (combo) |
 | `/github` | PR review, issue management, CI status |
 | `/tailwind-optimize` | Convert CSS to Tailwind utility classes |
 | `/caveman` | Toggle caveman compression mode |
@@ -97,12 +100,18 @@ Key config in `settings.json`:
 
 Workflow reference docs in `commands/` — used by Claude as slash commands:
 
+### Atomic
 - `commit.md` — commit formatting and staging rules
 - `ghbranch.md` — branch naming and creation
+- `checkout.md` — checkout branch and pull latest
 - `pr.md` — PR workflow and checklist
 - `push.md` — push/deploy verification
 - `npm.md` — safe npm install/update/remove
 - `composer.md` — safe Composer install/update/remove
+
+### Combo
+- `deliver.md` — commit → push
+- `ship.md` — commit → push → PR
 
 ## Status Line
 
