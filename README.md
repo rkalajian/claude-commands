@@ -89,6 +89,8 @@ Key config in `settings.json`:
 | `SubagentStart` | pixel-agents | Subagent lifecycle event |
 | `SubagentStop` | pixel-agents | Subagent lifecycle event |
 
+Pixel-agents hooks run via `node ~/.pixel-agents/hooks/claude-hook.js`. The `~/.pixel-agents/` directory is **external config — not tracked by this repo**. Install pixel-agents separately; add the `node ~/.pixel-agents/hooks/claude-hook.js` permission to your local `settings.local.json`.
+
 ## Skills
 
 | Skill | Trigger | Does |
@@ -145,3 +147,28 @@ Requires Agent calls to follow the `[model] Description` naming convention (enfo
 - **caveman** — `JuliusBrussee/caveman` via GitHub marketplace. Ultra-compressed communication mode. `/caveman lite|full|ultra` to switch levels.
 
 To add a required plugin, append its `name@marketplace` identifier to `REQUIRED_PLUGINS` in `ensure-plugins.sh`. It will be installed automatically on next session start.
+
+## External Tools
+
+### pixel-agents
+
+Event-driven Node.js hook runner that fires on all Claude Code lifecycle events. Config lives at `~/.pixel-agents/` — **not tracked by this repo**.
+
+```
+~/.pixel-agents/
+├── layout.json          # Agent layout config
+└── hooks/
+    └── claude-hook.js   # Hook entry point (called by Claude Code hooks)
+```
+
+Install pixel-agents independently. After install, add to `settings.local.json` (not committed):
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(node ~/.pixel-agents/hooks/claude-hook.js)"
+    ]
+  }
+}
+```

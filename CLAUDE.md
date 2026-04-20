@@ -76,6 +76,10 @@ Tasks to always delegate:
 
 Only keep work inline when the subagent cannot receive the necessary conversation context.
 
+## pixel-agents
+
+pixel-agents hooks fire on all lifecycle events via `node ~/.pixel-agents/hooks/claude-hook.js`. Config lives at `~/.pixel-agents/` — external, not tracked by this repo. Do not reference or depend on pixel-agents behavior in generated code or instructions.
+
 ## Security & Accessibility Standards
 
 ### Security-Conscious Coding
