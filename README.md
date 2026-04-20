@@ -35,7 +35,7 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 
 **Caveman mode** activates automatically on session start via the `SessionStart` hook. Change intensity with `/caveman lite|full|ultra`, or disable with `stop caveman`.
 
-**Model routing** is automatic — Haiku classifies task complexity, then routes to Haiku / Sonnet / Opus accordingly. Override by naming a model explicitly. All `Agent` calls use `[model]`-prefixed descriptions (e.g. `[haiku] Classify task`) so the subagent statusline can display the model.
+**Model routing** is automatic — Haiku classifies task complexity, then routes to Haiku / Sonnet / Opus accordingly. Thinking effort scales with complexity: `simple` = none, `medium` = brief, `complex` = deep. Override by naming a model explicitly. All `Agent` calls use `[model]`-prefixed descriptions (e.g. `[haiku] Classify task`) so the subagent statusline can display the model.
 
 ## Structure
 
@@ -56,7 +56,7 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 ## Global Rules (CLAUDE.md)
 
 - Terse responses, no filler or pleasantries
-- Three-tier model routing: Haiku → Sonnet → Opus by task complexity
+- Three-tier model routing: Haiku → Sonnet → Opus by task complexity, with effort scaled to match (none / brief / deep)
 - Caveman mode injected via SessionStart hook
 - Security-conscious coding: OWASP Top 10 prevention enforced on all generated code
 - WCAG 2.1 AA accessibility: semantic HTML, ARIA, keyboard nav, contrast ratios required on all frontend code
