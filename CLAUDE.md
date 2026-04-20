@@ -45,9 +45,11 @@ Task: {TASK_DESCRIPTION}
 
 ### Routing Rules
 
-- `simple` → use Haiku
-- `medium` → use Sonnet (default)
-- `complex` → use Opus
+| Complexity | Model | Thinking Effort |
+|---|---|---|
+| `simple` | Haiku | none — skip extended thinking |
+| `medium` | Sonnet | low — think briefly, stop when path is clear |
+| `complex` | Opus | high — think deeply, explore alternatives before acting |
 
 ### Overrides
 
@@ -59,6 +61,7 @@ Task: {TASK_DESCRIPTION}
 - When in doubt, route to Sonnet — it handles the vast majority of tasks well.
 - Do not route to Opus based on length alone; length ≠ complexity.
 - Classification itself always uses Haiku regardless of task complexity.
+- Effort scales with complexity: `simple` = no thinking, `medium` = brief thinking, `complex` = deep thinking. Match effort to the tier, not personal preference.
 - **Always prefix `Agent` descriptions with `[haiku]`, `[sonnet]`, or `[opus]`** matching the model used. This drives the subagent statusline model display. Example: `description="[sonnet] Generate migration script"`.
 
 ### Aggressive Subagent Delegation
