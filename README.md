@@ -43,6 +43,8 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 .claude/
 ├── CLAUDE.md                  # Global rules: response style, model routing
 ├── settings.json              # Permissions, hooks, status line, plugins
+├── .claude/
+│   └── settings.local.json    # Machine-local permissions (tracked)
 ├── statusline-command.sh      # Main status line script
 ├── subagent-statusline.sh     # Subagent status line (model badge + tokens)
 ├── ensure-plugins.sh          # Auto-installs missing plugins on SessionStart
@@ -50,7 +52,7 @@ Settings, hooks, and skills load automatically when Claude Code starts.
 ├── skills/                    # Custom skills loaded by Claude Code
 │   ├── github/                # GitHub PR/issue/CI workflow
 │   └── tailwind-optimize/     # Convert CSS to Tailwind utility classes
-└── .gitignore                 # Tracks commands/, skills/, CLAUDE.md, settings.json, statusline scripts
+└── .gitignore                 # Tracks commands/, skills/, CLAUDE.md, settings.json, statusline scripts, .claude/settings.local.json
 ```
 
 ## Global Rules (CLAUDE.md)
@@ -77,19 +79,8 @@ Key config in `settings.json`:
 |---|---|---|
 | `SessionStart` | inline echo | Inject caveman mode system message |
 | `SessionStart` | `ensure-plugins.sh` | Install missing plugins |
-| `SessionStart` | pixel-agents | Session lifecycle event |
-| `SessionEnd` | pixel-agents | Session lifecycle event |
-| `Stop` | pixel-agents | Turn stop event |
-| `PermissionRequest` | pixel-agents | Permission gate event |
-| `Notification` | pixel-agents | Notification event |
-| `UserPromptSubmit` | pixel-agents | Pre-prompt event |
-| `PreToolUse` | pixel-agents | Before tool execution |
-| `PostToolUse` | pixel-agents | After tool success |
-| `PostToolUseFailure` | pixel-agents | After tool failure |
-| `SubagentStart` | pixel-agents | Subagent lifecycle event |
-| `SubagentStop` | pixel-agents | Subagent lifecycle event |
 
-Pixel-agents hooks run via `node ~/.pixel-agents/hooks/claude-hook.js`. The `~/.pixel-agents/` directory is **external config — not tracked by this repo**. Install pixel-agents separately; add the `node ~/.pixel-agents/hooks/claude-hook.js` permission to your local `settings.local.json`.
+Pixel-agents lifecycle hooks are managed externally via `~/.pixel-agents/` — not tracked by this repo. See [External Tools](#pixel-agents) for setup.
 
 ## Skills
 
@@ -161,13 +152,13 @@ Event-driven Node.js hook runner that fires on all Claude Code lifecycle events.
     └── claude-hook.js   # Hook entry point (called by Claude Code hooks)
 ```
 
-Install pixel-agents independently. After install, add to `settings.local.json` (not committed):
+Install pixel-agents independently. After install, add the execution permission to `.claude/settings.local.json`. This repo's `settings.local.json` already includes the permission entry — it will work once pixel-agents is installed at `~/.pixel-agents/`.
 
 ```json
 {
   "permissions": {
     "allow": [
-      "Bash(node ~/.pixel-agents/hooks/claude-hook.js)"
+      "Bash(node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\")"
     ]
   }
 }
