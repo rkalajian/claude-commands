@@ -22,7 +22,18 @@
       "Read(~/.config/caveman/**)",
       "Bash(node \"/Users/rebel/.pixel-agents/hooks/claude-hook.js\")",
       "Bash(claude plugin *)",
-      "Bash(python3 -m json.tool)"
+      "Bash(python3 -m json.tool)",
+      "Bash(npm list *)",
+      "Read(//Users/rebel/**)",
+      "Bash(npm root *)",
+      "Bash(grep *)",
+      "Bash(sed \"s/['\\\\`\\\\\"]//g\")",
+      "Bash(perl *)",
+      "Bash(dd if=$FILE *)",
+      "Bash(node -e \"const fs=require\\('fs'\\); const code=fs.readFileSync\\('/tmp/index.js','utf8'\\); console.log\\(code.substring\\(0,2000\\)\\)\")",
+      "Bash(node)",
+      "Bash(node -e ' *)",
+      "Bash(gh repo *)"
     ]
   }
 }
