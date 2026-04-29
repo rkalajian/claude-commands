@@ -32,6 +32,7 @@ Read file. Identify:
 - Custom properties that map 1:1 to Tailwind utilities
 - Repeated patterns (margin, padding, flex, grid, colors, typography, borders, shadows)
 - Classes that can be composed from multiple Tailwind utilities
+- Properties already covered by global styles (body/html defaults, `@layer base`) — omit, don't duplicate
 - Anything that has NO Tailwind equivalent (keep as-is, flag it)
 
 ### 3. Tailwind Mapping Reference
@@ -119,22 +120,63 @@ These CSS classes were removed. Add Tailwind classes to corresponding HTML:
 
 ## Rules
 
+- **Global styles first** — build the global style map before touching any file; use it for every conversion decision
+- **Prefer semantic over arbitrary** — `font-sans` beats `font-['Inter']`, `leading-relaxed` beats `leading-[1.6]`
+- **Skip inherited globals** — if body/html already sets `font-family` or `line-height` globally, don't repeat on child elements
+- **Flag global conflicts** — per-element overrides that contradict globals get a comment: `/* overrides global */`
 - Never delete CSS that has no Tailwind equivalent — keep it, flag it
 - Never guess at color values — use nearest Tailwind color or flag it
 - Custom `--css-variables` used across many places → keep as-is, note it
 - Tailwind v3 class names by default; if project has `tailwind.config.js`, read it first for custom theme values
-- Check `tailwind.config.js` for custom spacing/colors before using default mappings
 - If file uses `@apply` already → respect existing Tailwind usage, extend it
 - Responsive/hover/focus variants: `hover:bg-blue-600`, `md:flex-row` — apply when original CSS had media queries or `:hover`
 - Never add `!important` via `!` prefix unless original CSS had `!important`
 
-## Config Check
+## Global Style Extraction (Run First)
 
-Before optimizing, check for:
+Before converting any file, extract global style definitions from the project:
+
+### 1. Tailwind Config Theme
 ```bash
 ls tailwind.config.js tailwind.config.ts 2>/dev/null
 ```
-If found → read it. Custom theme values take precedence over defaults.
+If found → read it. Extract `theme.extend` values for:
+- `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`, `letterSpacing`
+- `colors`, `spacing`, `borderRadius`, `boxShadow`
+
+Custom theme values **always** take precedence over default mappings.
+
+### 2. CSS Custom Properties
+Search for `:root` blocks in CSS/SCSS files:
+```bash
+grep -r ":root" --include="*.css" --include="*.scss" -l
+```
+Extract variables like `--font-sans`, `--leading-normal`, `--color-primary`, `--spacing-*`. Map them to Tailwind equivalents where possible.
+
+### 3. Base / Global Stylesheets
+Find and read global stylesheets (e.g. `global.css`, `base.css`, `app.css`, `main.css`, `index.css`):
+- Extract `@layer base` rules — these define element-level defaults (body font, heading sizes, etc.)
+- Extract `@apply` usage — shows which Tailwind classes are already canonical
+- Note any `html`/`body` typography rules (font-family, font-size, line-height) — these cascade globally
+
+### 4. Build a Global Style Map
+Construct a local mapping before touching any file:
+
+```
+Global style map (example):
+  --font-sans         → font-sans (or custom: font-['Inter'])
+  --color-primary     → text-[var(--color-primary)] or nearest: text-blue-600
+  body font-family    → font-sans (applied globally, skip per-element)
+  body line-height    → leading-relaxed (applied globally, skip per-element)
+  h1 font-size        → text-4xl (applied globally via @layer base)
+```
+
+### 5. Apply Global Map During Conversion
+- If a CSS property matches a **globally-defined** value → use the semantic Tailwind class, not a hardcoded arbitrary value
+- If the property is **already set globally** on that element type → omit the class entirely (it inherits)
+- Prefer `font-sans` over `font-['Arial']` when the global font maps to Tailwind's `fontFamily.sans`
+- Prefer `leading-normal` over `leading-[1.5]` when `1.5` matches the global `lineHeight.normal`
+- Flag any per-element overrides that fight the global defaults — these may be intentional or cruft
 
 ## Output Style
 
