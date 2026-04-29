@@ -60,6 +60,7 @@ Read file. Identify:
 - `text-align: center` → `text-center`
 - `color: #111827` → `text-gray-900` (nearest Tailwind color)
 - `text-transform: uppercase` → `uppercase`
+- Fluid font-size → `text-[clamp(min,preferred,max)]` (see Clamp section)
 
 **Backgrounds & Borders**
 - `background-color: #fff` → `bg-white`
@@ -117,6 +118,51 @@ These CSS classes were removed. Add Tailwind classes to corresponding HTML:
 - CSS custom properties (`--var`) used in JS — keep in CSS
 - Pseudo-selectors with complex logic — keep in CSS
 ```
+
+## Clamp — Fluid Values
+
+Use `clamp()` via Tailwind arbitrary values wherever a property varies across breakpoints or a fluid value is more expressive than a fixed one. Prefer `clamp()` over stacked responsive variants (`text-sm md:text-base lg:text-xl`) when a smooth fluid scale is appropriate.
+
+### When to use clamp
+
+| Property | Before | After |
+|----------|--------|-------|
+| Font size (responsive variants) | `text-sm md:text-lg lg:text-2xl` | `text-[clamp(0.875rem,2.5vw,1.5rem)]` |
+| Font size (existing CSS clamp) | `font-size: clamp(1.5rem, 4vw, 3rem)` | `text-[clamp(1.5rem,4vw,3rem)]` |
+| Line-height (responsive) | `leading-tight md:leading-normal lg:leading-relaxed` | `leading-[clamp(1.25,1vw+1.1,1.75)]` |
+| Padding / margin | `p-4 md:p-6 lg:p-10` | `p-[clamp(1rem,3vw,2.5rem)]` |
+| Gap | `gap-4 md:gap-8` | `gap-[clamp(1rem,3vw,2rem)]` |
+| Width / max-width | breakpoint overrides | `w-[clamp(300px,80vw,1200px)]` |
+| Height / min-height | `h-32 md:h-48 lg:h-64` | `h-[clamp(8rem,20vw,16rem)]` |
+| Border-radius (component scales) | `rounded md:rounded-lg lg:rounded-2xl` | `rounded-[clamp(0.25rem,1vw,1rem)]` |
+
+### Clamp formula
+
+```
+clamp(MIN, PREFERRED, MAX)
+  MIN       = smallest value (mobile floor)
+  PREFERRED = fluid middle, typically Xvw or calc(Xvw + Yrem)
+  MAX       = largest value (desktop cap)
+```
+
+Common preferred expressions:
+- `2.5vw` — simple viewport-relative
+- `calc(1rem + 1.5vw)` — base + fluid addition (most precise)
+- `4vi` — inline-size relative (use when writing-mode matters)
+
+### Clamp generation rules
+
+1. **Font sizes** — any `font-size` with responsive variants → `text-[clamp(...)]`
+2. **Line-height** — responsive `leading-*` variants → `leading-[clamp(...)]`; unitless preferred: `clamp(1.2,1vw+1,1.75)`
+3. **Spacing (padding/margin/gap)** — 3+ responsive breakpoints on same property → `clamp()`; 2 breakpoints only if jump ≥ 2 Tailwind steps
+4. **Dimensions (width/height/min/max)** — breakpoint overrides on same dimension → `clamp()`; use `px` for hard pixel bounds, `rem` for type-relative, `vw`/`vh` for viewport-relative
+5. **Border-radius** — component-level radius that changes across breakpoints → `rounded-[clamp(...)]`; global/design-system radius values → keep as Tailwind semantic class (`rounded-lg`)
+6. **Existing CSS `clamp()` values** → preserve verbatim, wrap in Tailwind arbitrary
+7. **Never clamp:** colors, font-weight, border-width, z-index, opacity, grid column counts — discrete values don't benefit
+
+### Clamp in global style map
+
+When building the global style map, note any existing `clamp()` values in `tailwind.config.js` `fontSize` or `spacing` entries — use those keys directly instead of re-writing the clamp inline.
 
 ## Rules
 
